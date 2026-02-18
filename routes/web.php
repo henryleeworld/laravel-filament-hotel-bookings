@@ -2,4 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::redirect('/', '/booking');
+Route::get('/', function () {
+    return redirect()->to('/booking');
+});

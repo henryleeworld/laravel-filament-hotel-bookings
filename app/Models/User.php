@@ -19,7 +19,7 @@ class User extends Authenticatable implements FilamentUser
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $fillable = [
         'name',
@@ -30,7 +30,7 @@ class User extends Authenticatable implements FilamentUser
     /**
      * The attributes that should be hidden for serialization.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $hidden = [
         'password',
@@ -50,6 +50,18 @@ class User extends Authenticatable implements FilamentUser
         ];
     }
 
+    protected static function booted(): void
+    {
+        static::created(function (User $user) {
+            if (filament()->getCurrentPanel()->getId() === 'hotel') {
+                $user->assignRole('hotels');
+            }
+            if (filament()->getCurrentPanel()->getId() === 'booking') {
+                $user->assignRole('customers');
+            }
+        });
+    }
+
     public function canAccessPanel(Panel $panel): bool
     {
         if ($panel->getId() === 'hotel' && $this->hasRole('hotels')) {
@@ -61,18 +73,6 @@ class User extends Authenticatable implements FilamentUser
         }
 
         return false;
-    }
-
-    protected static function booted(): void
-    {
-        static::created(function (User $user) {
-            if (filament()->getCurrentPanel()->getId() === 'hotel') {
-                $user->assignRole('hotels');
-            }
-            if (filament()->getCurrentPanel()->getId() === 'booking') {
-                $user->assignRole('customers');
-            }
-        });
     }
 
     /**

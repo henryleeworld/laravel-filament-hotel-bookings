@@ -1,4 +1,4 @@
-# Laravel 11 Filament 旅館預訂
+# Laravel 12 Filament 旅館預訂
 
 Filament 旅館預訂採用快速建立簡捷的 TALL（Tailwind CSS、Alpine.js、Laravel 和 Livewire）堆疊應用程式的工具組，立即確認旅館尚有房間，幫助旅館旅遊業提升轉換率，增加業績。
 
@@ -21,6 +21,14 @@ $ php artisan key:generate
 ```sh
 $ php artisan migrate --seed
 ```
+- 執行安裝 Vite 和 Laravel 擴充套件引用的依賴項目。
+```sh
+$ npm install
+```
+- 執行正式環境版本化資源管道並編譯。
+```sh
+$ npm run build
+```
 - 在瀏覽器中輸入已定義的路由 URL 來訪問，例如：http://127.0.0.1:8000。
 - 你可以經由 `/hotel/login` 來進行旅館合作夥伴登入，預設的電子郵件和密碼分別為 __hotel@admin.com__ 和 __password__ 。
 - 你可以經由 `/booking/login` 來進行客戶登入，預設的電子郵件和密碼分別為 __booking@admin.com__ 和 __password__ 。
@@ -28,8 +36,8 @@ $ php artisan migrate --seed
 ----
 
 ## 畫面截圖
-![](https://i.imgur.com/tl05K19.png)
+![](https://i.imgur.com/QAoHNvv.png)
 > 合作夥伴刊登旅館，快速開始創造更多收入
 
-![](https://i.imgur.com/L2ptBUl.png)
+![](https://i.imgur.com/Vjm1JO0.png)
 > 客戶選擇入住的開始和結束日期來預訂

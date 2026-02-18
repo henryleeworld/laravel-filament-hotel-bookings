@@ -2,28 +2,30 @@
 
 namespace App\Filament\Booking\Pages;
 
-use App\Filament\Booking\Resources\OrderResource;
+use App\Filament\Booking\Resources\Orders\OrderResource;
 use App\Models\Room;
+use BackedEnum;
 use Filament\Actions\Action;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
-use Filament\Forms\Form;
 use Filament\Pages\Page;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Concerns\InteractsWithSchemas;
+use Filament\Schemas\Contracts\HasSchemas;
+use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Carbon;
 
-class FindHotel extends Page implements HasForms, HasActions
+class FindHotel extends Page implements HasActions, HasSchemas
 {
-    use InteractsWithActions, InteractsWithForms;
+    use InteractsWithActions, InteractsWithSchemas;
 
-    protected static ?string $navigationIcon = 'heroicon-o-magnifying-glass-circle';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedMagnifyingGlassCircle;
 
-    protected static string $view = 'filament.booking.pages.find-hotel';
+    protected string $view = 'filament.app.booking.pages.find-hotel';
 
     public ?array $data = [];
 
@@ -52,10 +54,10 @@ class FindHotel extends Page implements HasForms, HasActions
                 });
     }
 
-    public function form(Form $form): Form
+    public function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 Grid::make()
                     ->columns()
                     ->schema([
